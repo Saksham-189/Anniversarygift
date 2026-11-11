@@ -1,7 +1,7 @@
 // All personal content belongs here. Keep values as plain text.
 export const content = {
   meta: {
-    pageTitle: "Happy anniversary, baby",
+    pageTitle: "3rd-Anniversary",
     yourName: "Saksham",
     partnerName: "baby",
     anniversaryDate: "2026-11-12",

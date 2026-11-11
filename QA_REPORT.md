@@ -5,6 +5,7 @@
 - Static runtime and required assets: approximately 1.33 MB. Image masters totalled 18.01 MB; WebP exports total 1.18 MB, a 93.5% reduction. Exported photos have no EXIF metadata.
 - Open Graph preview: verified 1200 × 630 JPEG, absolute public image URL, static title and description in HTML, plus a large-image Twitter card. The preview can be read without JavaScript.
 - Local mobile Lighthouse: Performance 95, Accessibility 100; FCP 1.6 s, LCP 2.9 s, CLS 0.002. This automated score covers the opening page; subsequent views were checked by keyboard and accessibility tree.
+- First live mobile audit: Performance 84, Accessibility 100. The public host's initial document response took 4.19 s; the actual opening transferred 232 KiB with 50 ms total blocking time and zero layout shift. Hosting startup/challenge latency remains outside the static page's control.
 - Viewport checks cover phones/tablets at 360, 390, 430, and 768px, and laptops at 1024 × 640, 1280 × 900, 1366 × 768, 1440 × 900, and 1536 × 864. No horizontal overflow found.
 - Keyboard: Begin/Continue, photo opening, dialog focus containment and focus return, note reveals, completion, surprise, and replay.
 - State tests: Fisher–Yates shuffle, no repeats, reload recovery, reset, corrupt storage, blocked storage getter/read/write, duplicate/empty lists, rapid activation, and instant reduced-motion handlers.
