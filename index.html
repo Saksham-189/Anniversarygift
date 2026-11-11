@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#F3EFF2">
+    <meta name="description" content="A little collection of us, and everything I want to say to you.">
+    <meta name="robots" content="noindex">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Happy anniversary, baby">
+    <meta property="og:description" content="A little collection of us, and everything I want to say to you.">
+    <meta property="og:image" content="https://for-you-baby-november12.validelf4096.chatgpt.site/assets/og-image.jpg">
+    <!-- share-meta:start -->
+    <meta property="og:url" content="https://for-you-baby-november12.validelf4096.chatgpt.site/">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Happy anniversary, baby. A personal anniversary letter.">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- share-meta:end -->
+    <title>Happy anniversary, baby</title>
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Kalam:wght@400;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="app.js"></script>
+  </head>
+  <body>
+    <main>
+      <section id="welcome" class="welcome" aria-labelledby="welcome-headline">
+        <div class="welcome-letter">
+          <p id="anniversary-label" class="anniversary-label"></p>
+          <h1 id="welcome-headline" tabindex="-1"></h1>
+          <p id="welcome-subline" class="welcome-subline"></p>
+          <p class="welcome-date"><time id="anniversary-date" hidden></time></p>
+          <button id="begin-button" type="button"></button>
+        </div>
+      </section>
+      <section id="timeline" class="story" hidden aria-labelledby="timeline-heading">
+        <header class="moments-header">
+          <p id="moments-dedication"></p>
+          <a id="moments-story-link" href="#timeline-list"></a>
+        </header>
+        <div class="moments-hero">
+          <div class="story-intro">
+            <h2 id="timeline-heading" tabindex="-1"></h2>
+            <p id="timeline-description"></p>
+          </div>
+          <div id="moments-featured-photo" class="moments-featured-photo"></div>
+        </div>
+        <ol id="timeline-list" class="timeline-list" role="list"></ol>
+        <section class="illustration-gallery" aria-labelledby="illustrations-heading">
+          <h3 id="illustrations-heading"></h3>
+          <p id="illustrations-description"></p>
+          <ul id="illustrations-list" class="illustration-grid" role="list"></ul>
+        </section>
+        <button id="timeline-continue" type="button"></button>
+      </section>
+      <section id="reasons" class="story" hidden aria-labelledby="reasons-heading">
+        <div class="story-intro">
+          <h2 id="reasons-heading" tabindex="-1"></h2>
+          <p id="reasons-description"></p>
+        </div>
+        <img class="reasons-bear" src="assets/art/heart-bear.webp" width="120" height="120" alt="" aria-hidden="true" loading="lazy">
+        <div class="reason-stage">
+          <div id="reason-note" class="reason-note is-sealed">
+            <div class="reason-message" aria-live="polite" aria-atomic="true">
+              <p id="reason-text"></p>
+            </div>
+          </div>
+        </div>
+        <p id="reason-progress" class="reason-progress"></p>
+        <button id="reason-reveal" type="button"></button>
+        <div id="reasons-complete" class="reasons-complete" hidden>
+          <p id="reasons-closing"></p>
+          <button id="reasons-continue" type="button"></button>
+          <button id="reasons-reset" class="quiet-button" type="button"></button>
+        </div>
+      </section>
+      <section id="finale" class="story" hidden aria-labelledby="finale-heading">
+        <article class="final-letter">
+          <h2 id="finale-heading" tabindex="-1"></h2>
+          <div id="finale-body" class="letter-body"></div>
+          <p id="finale-signoff" class="letter-signoff"></p>
+        </article>
+        <div class="finale-controls">
+          <button id="surprise-button" type="button" aria-expanded="false" aria-controls="surprise-panel"></button>
+          <section id="surprise-panel" class="surprise-panel" role="region" aria-labelledby="surprise-button" tabindex="-1" hidden></section>
+          <button id="replay-button" class="quiet-button" type="button"></button>
+        </div>
+      </section>
+    </main>
+    <dialog id="photo-lightbox" class="photo-lightbox" aria-labelledby="lightbox-title" aria-describedby="lightbox-caption">
+      <button id="lightbox-close" type="button" autofocus></button>
+      <h2 id="lightbox-title"></h2>
+      <div class="lightbox-photo">
+        <img id="lightbox-image" width="960" height="1200" alt="">
+        <p id="lightbox-fallback" hidden></p>
+      </div>
+      <p id="lightbox-caption"></p>
+    </dialog>
+    <noscript><p class="noscript">Please enable JavaScript to open this anniversary letter.</p></noscript>
+  </body>
+</html>
