@@ -1,6 +1,9 @@
 import { content } from "./content.js";
 import { createReasonDeck } from "./reasons.js";
 import { renderSurprise } from "./surprise.js";
+import { initializeMusic } from "./music.js";
+
+initializeMusic(content.music);
 
 document.title = content.meta.pageTitle;
 document.querySelector('meta[property="og:title"]').content = content.meta.pageTitle;
@@ -57,6 +60,11 @@ const activeAnimations = new Set();
 const gentleEasing = getComputedStyle(document.documentElement)
   .getPropertyValue("--ease-gentle").trim();
 
+function scrollToStart() {
+  window.scrollTo({ top: 0, behavior: "instant" });
+  document.querySelector("main").scrollTop = 0;
+}
+
 async function animate(element, frames, duration) {
   if (motionPreference.matches || typeof element.animate !== "function") return;
   const animation = element.animate(frames, {
@@ -97,7 +105,10 @@ begin.addEventListener("click", async () => {
   welcome.hidden = true;
   timeline.hidden = false;
   timeline.inert = false;
-  window.scrollTo({ top: 0, behavior: "instant" });
+  // Start every story photo when the visitor enters the story. Some in-app
+  // browsers do not resume native lazy loading after a hidden section opens.
+  for (const image of document.querySelectorAll("#timeline img")) image.loading = "eager";
+  scrollToStart();
   document.getElementById("timeline-heading").focus({ preventScroll: true });
   await animate(timeline, [{ opacity: 0 }, { opacity: 1 }], 450);
 });
@@ -248,7 +259,7 @@ continueButton.addEventListener("click", async () => {
   const reasons = document.getElementById("reasons");
   reasons.hidden = false;
   reasons.inert = false;
-  window.scrollTo({ top: 0, behavior: "instant" });
+  scrollToStart();
   document.getElementById("reasons-heading").focus({ preventScroll: true });
   await animate(reasons, [{ opacity: 0 }, { opacity: 1 }], 450);
 });
@@ -315,7 +326,7 @@ reasonsContinue.addEventListener("click", async () => {
   const finale = document.getElementById("finale");
   finale.hidden = false;
   finale.inert = false;
-  window.scrollTo({ top: 0, behavior: "instant" });
+  scrollToStart();
   document.getElementById("finale-heading").focus({ preventScroll: true });
   await animate(finale, [{ opacity: 0 }, { opacity: 1 }], 450);
 });
@@ -368,7 +379,7 @@ document.getElementById("replay-button").addEventListener("click", async () => {
   continueButton.disabled = false;
   reasonsContinue.disabled = false;
   opening = false;
-  window.scrollTo({ top: 0, behavior: "instant" });
+  scrollToStart();
   document.getElementById("welcome-headline").focus({ preventScroll: true });
   await animate(document.querySelector(".welcome-letter"), [
     { opacity: 0, transform: "translateY(8px)" },

@@ -1,5 +1,7 @@
 # Reference-inspired assets
 
+Update: the generated collage below is superseded and is no longer shipped. The final surprise is an HTML/CSS template showing the unchanged uploads in `assets/photos/originals/`. No image generation was used for this replacement. See `checks/original-photo-hashes.json` for the original-file checksums. Earlier background and bear artwork remain unchanged.
+
 Created using the built-in image generation tool, not the CLI. Project copies are local assets; no generated-image cache paths are referenced by the page. Pre-publication compression remains for Phase 6.
 
 ## Collage

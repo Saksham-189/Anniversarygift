@@ -1,4 +1,4 @@
-import { readFile, writeFile, mkdir, copyFile, stat } from "node:fs/promises";
+import { readFile, writeFile, mkdir, copyFile, stat, readdir, unlink } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { content } from "../content.js";
@@ -32,13 +32,24 @@ const extra = [
 html = html.replace(/\s*<!-- share-meta:start -->[\s\S]*?<!-- share-meta:end -->/, "");
 html = html.replace("    <title>", `    <!-- share-meta:start -->\n    ${extra}\n    <!-- share-meta:end -->\n    <title>`);
 await writeFile(path.join(root, "index.html"), html);
-const files = ["index.html", "styles.css", "app.js", "content.js", "reasons.js", "surprise.js"];
+const files = ["index.html", "styles.css", "app.js", "content.js", "reasons.js", "surprise.js", "music.js"];
 const assets = new Set(["assets/og-image.jpg"]);
 for (const file of files) {
   const source = await readFile(path.join(root, file), "utf8");
   for (const match of source.matchAll(/assets\/[a-zA-Z0-9_./-]+/g)) assets.add(match[0]);
 }
 await mkdir(path.join(root, "dist"), { recursive: true });
+const wanted = new Set([...files, ...assets].map(file => path.resolve(root, "dist", file)));
+async function removeStale(directory) {
+  for (const entry of await readdir(directory, { withFileTypes: true })) {
+    const target = path.resolve(directory, entry.name);
+    const relative = path.relative(path.join(root, "dist"), target);
+    if (relative.startsWith("..") || path.isAbsolute(relative) || entry.isSymbolicLink()) throw new Error("Unsafe output path");
+    if (entry.isDirectory()) await removeStale(target);
+    else if (!wanted.has(target)) await unlink(target);
+  }
+}
+await removeStale(path.join(root, "dist"));
 let bytes = 0;
 for (const file of [...files, ...assets]) {
   const target = path.join(root, "dist", file);

@@ -5,7 +5,7 @@ export const content = {
     yourName: "Saksham",
     partnerName: "baby",
     anniversaryDate: "2026-11-12",
-    siteUrl: "https://for-you-baby-november12.validelf4096.chatgpt.site",
+    siteUrl: "https://3rd-anniversary-saksham-2026.netlify.app",
     shareDescription: "A little collection of us, and everything I want to say to you.",
     shareTagline: "A little collection of us",
     anniversaryLabel: "Happy anniversary"
@@ -14,6 +14,16 @@ export const content = {
     headline: "For you, baby",
     subline: "A little collection of us, and everything I want to say to you.",
     buttonLabel: "Begin"
+  },
+  music: {
+    src: "assets/audio/tum-ho-toh.mp3",
+    title: "Tum Ho Toh · Saiyaara",
+    artist: "Vishal Mishra & Hansika Pareek",
+    playLabel: "Play Tum Ho Toh",
+    pauseLabel: "Pause music",
+    playerLabel: "Tum Ho Toh music player",
+    loadingLabel: "Loading music…",
+    retryLabel: "Retry music"
   },
   timelineIntro: {
     dedication: "For you, baby",
@@ -33,7 +43,7 @@ export const content = {
       date: "Around February 2024",
       title: "Back in class 12",
       caption: "Us, back in class 12. Now that we’re far apart, this photo means so much to me.",
-      photo: "assets/photos/01-class-12-selfie.webp",
+      photo: "assets/photos/01-class-12-selfie.jpg",
       photoAlt: "A close selfie of us together, wearing a dark suit with a red tie and a black and red sari.",
       photoPresentation: "camera"
     },
@@ -41,14 +51,14 @@ export const content = {
       date: "Around February 2024",
       title: "When we could stand this close",
       caption: "Another memory from our class 12 days. I miss having you right beside me, close enough to put my arm around you.",
-      photo: "assets/photos/02-class-12-together.webp",
+      photo: "assets/photos/02-class-12-together.jpg",
       photoAlt: "Us standing side by side, my arm around her shoulders, in a dark suit and a black and red sari."
     },
     {
       date: "",
       title: "Close to you",
       caption: "This is the closeness I miss. I’d love to be beside you like this again.",
-      photo: "assets/photos/03-close-to-you.webp",
+      photo: "assets/photos/03-close-to-you.jpg",
       photoAlt: "Us sitting close together, her arms around me, wearing pink and red tops.",
       photoPresentation: "rotated"
     },
@@ -56,14 +66,14 @@ export const content = {
       date: "",
       title: "Your arms around me",
       caption: "A little moment of us, together. Looking at this makes me wish I could be back in your arms.",
-      photo: "assets/photos/04-your-arms-around-me.webp",
+      photo: "assets/photos/04-your-arms-around-me.jpg",
       photoAlt: "Her hugging me from behind, her arms around my shoulders and her face beside mine."
     },
     {
       date: "",
       title: "All these little versions of you",
       caption: "All these pictures of you, and still I wish I could see you in person. Until we’re close again, I’m keeping these memories close.",
-      photo: "assets/photos/05-all-these-little-you-s.webp",
+      photo: "assets/photos/05-all-these-little-you-s.jpg",
       photoAlt: "A six-photo collage of her smiling, posing playfully, holding a rose, and standing beside colourful artwork.",
       photoPresentation: "collage"
     },
@@ -71,7 +81,7 @@ export const content = {
       date: "",
       title: "Right where I want to be",
       caption: "Your arms around me, and mine around you. This is what I’m looking forward to: being close to you again.",
-      photo: "assets/photos/06-in-your-arms.webp",
+      photo: "assets/photos/06-in-your-arms.jpg",
       photoAlt: "Us holding each other and looking at one another, her arms around my shoulders and mine around her waist."
     }
   ],
@@ -82,19 +92,19 @@ export const content = {
       {
         title: "You, under the trees",
         caption: "A little illustrated version of you, with the smile I miss.",
-        photo: "assets/photos/storybook-01-under-the-tree.webp",
+        photo: "assets/photos/storybook-01-under-the-tree.jpg",
         photoAlt: "A Ghibli-style illustration of her in a yellow kurta, resting her cheek on her hand beneath a leafy tree."
       },
       {
         title: "You, all dressed up",
         caption: "Another little version of you to make me smile from far away.",
-        photo: "assets/photos/storybook-02-in-a-sari.webp",
+        photo: "assets/photos/storybook-02-in-a-sari.jpg",
         photoAlt: "A Ghibli-style illustration of her smiling in a wine-coloured sari with gold detailing and floral earrings."
       },
       {
         title: "Us, in another little world",
         caption: "Even here, my favourite part is that we’re together.",
-        photo: "assets/photos/storybook-03-us-together.webp",
+        photo: "assets/photos/storybook-03-us-together.jpg",
         photoAlt: "A Ghibli-style illustrated selfie of us together, wearing a suit with a red tie and a red and gold sari."
       }
     ]
@@ -143,10 +153,20 @@ export const content = {
     surprise: {
       type: "photo", // "message" | "photo" | "video" | "link"
       text: "Every little version of you. The same person I want beside me, through all of it.",
-      mediaSrc: "assets/photos/anniversary-collage-baby.webp",
-      photoWidth: "1122",
-      photoHeight: "1402",
-      photoAlt: "An anniversary collage of nine portraits of her in tilted white Polaroid frames, with a blush background, butterflies, flowers, and the words happy anniversary, baby."
+      templateTitle: "happy anniversary",
+      templateName: "baby",
+      originalPhotoLabel: "View original photo",
+      photos: [
+        { src: "assets/photos/originals/portrait-01.png", alt: "Her nighttime selfie in a red embroidered outfit.", width: "720", height: "1280" },
+        { src: "assets/photos/originals/portrait-02.png", alt: "Her in orange, resting her head on her hand beside a notebook.", width: "720", height: "1280" },
+        { src: "assets/photos/originals/portrait-03.png", alt: "Her smiling in a purple embroidered outfit.", width: "720", height: "1280" },
+        { src: "assets/photos/originals/portrait-04.png", alt: "Her portrait in teal and gold.", width: "720", height: "1280" },
+        { src: "assets/photos/originals/portrait-05.png", alt: "Her selfie in a navy outfit with red embroidery.", width: "1280", height: "720", presentation: "landscape" },
+        { src: "assets/photos/originals/portrait-06.png", alt: "Her in a plum and gold sari.", width: "720", height: "1280" },
+        { src: "assets/photos/originals/portrait-07.png", alt: "The original event photo of her in a red patterned outfit.", width: "720", height: "1280", presentation: "sideways" },
+        { src: "assets/photos/originals/portrait-08.png", alt: "Her smiling in green, with triangular earrings.", width: "1048", height: "1228" },
+        { src: "assets/photos/originals/portrait-10.png", alt: "Her portrait in white crochet over a black top.", width: "720", height: "1280" }
+      ]
     }
   }
 };

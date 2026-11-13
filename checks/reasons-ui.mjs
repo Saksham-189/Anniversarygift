@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 for (const reducedMotion of [false, true]) {
   const nodes = new Map();
   const pending = [];
+  const timelinePhotos = [{ loading: "lazy" }, { loading: "lazy" }];
   let animationCount = 0;
   class Element {
     constructor() {
@@ -34,6 +35,7 @@ for (const reducedMotion of [false, true]) {
     documentElement: { lang: "en" },
     getElementById: node,
     querySelector: node,
+    querySelectorAll: selector => selector === "#timeline img" ? timelinePhotos : [],
     createElement: () => new Element()
   };
   globalThis.window = {
@@ -108,6 +110,7 @@ for (const reducedMotion of [false, true]) {
   await settle();
   await beginAgain;
   assert.equal(node("timeline").inert, false);
+  assert.ok(timelinePhotos.every(image => image.loading === "eager"));
   const continueAgain = node("timeline-continue").trigger("click");
   await settle();
   await continueAgain;

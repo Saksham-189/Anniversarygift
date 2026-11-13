@@ -9,6 +9,8 @@ root = Path(__file__).resolve().parents[1]
 content = json.load(sys.stdin)
 before = after = 0
 for source in sorted((root / "assets").rglob("*.png")):
+    if "originals" in source.parts:
+        continue
     image = ImageOps.exif_transpose(Image.open(source))
     alpha = source.name == "heart-bear.png"
     image = image.convert("RGBA" if alpha else "RGB")
@@ -18,8 +20,11 @@ for source in sorted((root / "assets").rglob("*.png")):
         image.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
     clean = Image.new(image.mode, image.size)
     clean.paste(image)
-    destination = source.with_suffix(".webp")
-    clean.save(destination, "WEBP", quality=88 if "collage-baby" in source.name else 82, method=6)
+    destination = source.with_suffix(".webp" if source.parent.name == "art" else ".jpg")
+    if source.parent.name == "art":
+        clean.save(destination, "WEBP", quality=82, method=6)
+    else:
+        clean.save(destination, "JPEG", quality=88 if "collage-baby" in source.name else 84, optimize=True, progressive=True)
     before += source.stat().st_size
     after += destination.stat().st_size
 

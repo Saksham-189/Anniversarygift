@@ -58,4 +58,24 @@ for (const type of ["photo", "video", "link", "unknown"]) {
   renderSurprise(panel, { type, text: "Hello", mediaSrc: "" }, labels, doc);
   assert.equal(panel.children.at(-1).textContent, labels.unavailableText);
 }
+const originals = [
+  { src: "assets/photos/originals/one.png", alt: "Original one", width: "720", height: "1280" },
+  { src: "assets/photos/originals/two.png", alt: "Original two", width: "720", height: "1280", presentation: "sideways" }
+];
+const originalPanel = new Element("section");
+renderSurprise(originalPanel, {
+  type: "photo", text: "Caption", templateTitle: "happy anniversary", templateName: "baby",
+  originalPhotoLabel: "View original", photos: originals
+}, labels, doc);
+const template = originalPanel.children[1];
+assert.equal(template.className, "original-collage");
+const originalFrames = template.children[2].children;
+assert.equal(originalFrames.length, 2);
+originalFrames.forEach((frame, index) => {
+  const original = frame.children[0].children[0];
+  assert.equal(original.src, new URL(originals[index].src, doc.baseURI).href);
+  assert.equal(original.alt, originals[index].alt);
+  assert.equal(frame.href, original.src);
+  assert.equal(original.loading, "eager");
+});
 console.log("PASS: all four surprise types, safe URLs, plain text, missing media, video controls and cleanup");

@@ -1,5 +1,7 @@
 dist/
 qa/
 node_modules/
+.netlify/
 __pycache__/
 assets/**/*.png
+!assets/photos/originals/*.png

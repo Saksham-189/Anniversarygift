@@ -68,7 +68,11 @@ Edit the title, paragraph array, and sign-off in `content.finale`. The letter us
 - `video`: displays the caption and native playback controls, with `playsinline`, no autoplay, and no preloading before Play.
 - `link`: displays the caption and a link to `mediaSrc` in a new tab with `noopener noreferrer`. Only HTTP/HTTPS URLs are accepted.
 
-The current photo reveal is `assets/photos/anniversary-collage-baby.png`, composed from nine distinct supplied portraits (one upload was an exact duplicate). `photoWidth` and `photoHeight` reserve its correct aspect ratio. Its caption remains editable as real text in `content.js`. An empty or unavailable asset displays a quiet fallback instead of a broken image. Replay hides the reveal, stops and releases any video, clears the revealed reasons, resets navigation controls, and focuses the opening heading. It does not reload the page.
+The final photo reveal is now an HTML/CSS Polaroid template containing the original uploaded PNG files directly. All ten uploads are saved unchanged in `assets/photos/originals/`; the nine distinct photos appear once each. The sideways photo is rotated for display with CSS, and photos use `object-fit: contain` so their faces and proportions are not altered. Each opens the original file in a new tab. No generated collage is used in the published page. Edit the template heading, name, caption, and `photos` array in `content.finale.surprise`. Run `node checks/originals.mjs` to verify upload hashes and exact deployment copies. The asset-preparation script deliberately skips the `originals/` folder.
+
+The music control plays the supplied MP3 from assets/audio/tum-ho-toh.mp3. Playback starts only after Play Tum Ho Toh is pressed, loops at a gentle volume, and continues across section changes and replay. The same button pauses and resumes the track without a video player. Music settings and labels are in content.music.
+
+The core static output is about 1.57 MB. The untouched originals add about 9.09 MB, fetched only when the final surprise is opened. This larger optional payload preserves the exact supplied files. Replay resets the story, reasons, and surprise without reloading; music is controlled independently.
 
 Run from `anniversary/`:
 
@@ -112,14 +116,14 @@ Check the timeline at the same widths: photos and captions alternate at 768px an
 
 ## Publish and update
 
-Host: Sites. Public URL: https://for-you-baby-november12.validelf4096.chatgpt.site/
+Host: Netlify. Public URL: https://3rd-anniversary-saksham-2026.netlify.app/
 
-The selected Site is recorded in `.openai/hosting.json`; reuse that project ID for every update. The audience is public, as requested. `noindex` asks search engines not to index the page; anyone with its URL can open it.
+The Netlify project ID is `b618871c-bdcf-4030-a6eb-2700625eff85`; reuse it for every update. The audience is public, as requested. `noindex` asks search engines not to index the page; anyone with its URL can open it. The old `.openai/hosting.json` records the previous host and is not used by Netlify.
 
-1. Edit `content.js` and replace or add photos in `assets/photos/`. Production uses WebP exports; original PNG masters remain local and are excluded from Git and `dist/`.
+1. Edit `content.js` and replace or add photos in `assets/photos/`. Production now uses JPEG photos for browser compatibility; decorative artwork uses WebP. Original PNG masters remain local and are excluded from Git and `dist/`. Entering the timeline starts all story images immediately to avoid hidden-section lazy-loading problems in in-app browsers.
 2. If photo masters or share-card content changed, use Python with Pillow to run the asset preparation command below. This creates metadata-free WebP images and a 1200 × 630 preview card from the content file.
 3. Run `node scripts/prepare-site.mjs` to sync static preview metadata and copy only required runtime files/assets into `dist/`.
-4. Run the checks below, then ask Codex to redeploy this same Site using its existing manifest. The Sites workflow pushes the matching source commit, packages `dist/`, saves that version, and deploys it to the same public URL.
+4. Run the checks below, then deploy with `npx --yes --package=netlify-cli netlify deploy --site b618871c-bdcf-4030-a6eb-2700625eff85 --dir dist --prod --no-build`. Sign in with `netlify login` if requested. This uploads the prepared static folder to the same public URL.
 
 ```powershell
 node --input-type=module -e 'import {content} from "./content.js"; process.stdout.write(JSON.stringify(content));' | python3 scripts/prepare-assets.py
@@ -135,3 +139,4 @@ Use a Python installation with Pillow for asset preparation (one-time setup: `py
 The publish check rejects unfilled personal placeholders, missing assets, uncompressed PNGs in `dist/`, and incorrect share-card metadata. The prepared static site is about 1.33 MB. Local mobile Lighthouse scored Performance 95 and Accessibility 100. Detailed scope is recorded in `QA_REPORT.md`.
 
 After publishing, open the public link on iOS Safari, Android Chrome, and from WhatsApp. Check the chat preview, browser-bar resizing, photos, reasons, video controls if a video is later configured, and replay. Physical-device and chat-app checks require those devices/apps; desktop browser viewports do not replace them.
+

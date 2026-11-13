@@ -23,6 +23,44 @@ export function renderSurprise(container, surprise, labels, doc = document) {
   const cleanup = () => {};
   if (surprise.type === "message") return cleanup;
 
+  if (surprise.type === "photo" && Array.isArray(surprise.photos)) {
+    const template = doc.createElement("div");
+    template.className = "original-collage";
+    const heading = doc.createElement("h3");
+    heading.textContent = surprise.templateTitle;
+    const name = doc.createElement("p");
+    name.className = "original-collage-name";
+    name.textContent = surprise.templateName;
+    const grid = doc.createElement("div");
+    grid.className = "original-collage-grid";
+    for (const photo of surprise.photos) {
+      const source = resolveSurpriseSource(photo.src, doc.baseURI);
+      if (!source) continue;
+      const frame = doc.createElement("a");
+      frame.className = "original-polaroid";
+      if (["landscape", "sideways"].includes(photo.presentation)) frame.className += ` original-${photo.presentation}`;
+      frame.href = source;
+      frame.target = "_blank";
+      frame.rel = "noopener noreferrer";
+      frame.setAttribute("aria-label", `${surprise.originalPhotoLabel}: ${photo.alt}`);
+      const image = doc.createElement("img");
+      image.src = source;
+      image.alt = photo.alt;
+      image.width = Number(photo.width);
+      image.height = Number(photo.height);
+      image.loading = "eager";
+      image.addEventListener("error", () => { frame.hidden = true; unavailable(); }, { once: true });
+      const photoWindow = doc.createElement("span");
+      photoWindow.className = "original-photo";
+      photoWindow.append(image);
+      frame.append(photoWindow);
+      grid.append(frame);
+    }
+    template.append(heading, name, grid);
+    container.append(template);
+    return cleanup;
+  }
+
   const source = resolveSurpriseSource(surprise.mediaSrc, doc.baseURI);
   if (!source || !["photo", "video", "link"].includes(surprise.type)) {
     unavailable();
